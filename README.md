@@ -61,10 +61,24 @@ pip install -r requirements.txt
 
 1. Set up the environment variables.
 
-Create a `.env` file in the project root directory and add your OpenAI API key:
+Create a `.env` file in the project root directory and add your LLM API configurations:
 
 ```bash
-OPENAI_API=your_openai_api_key_here
+OPENAI_API_KEY="sk-your_openai_api_key_here"
+OPENAI_API_BASE="https://api.openai.com/v1"
+OPENAI_MODEL_NAME="gpt-4o-2024-05-13"
+
+# --- Alternative AI Provider Configuration (Uncomment and modify to use these instead) ---
+# If you want to use a local model via Ollama:
+# (First, ensure Ollama is installed and you've pulled your desired model, e.g., `ollama pull llama2`)
+# OPENAI_API_KEY="ollama" # API key can be anything for local Ollama
+# OPENAI_API_BASE="http://localhost:11434/v1" # Default Ollama API endpoint
+# OPENAI_MODEL_NAME="llama2" # Change this to the model you pulled
+
+# If you want to use Together.ai (a cloud service with OpenAI-compatible API):
+# OPENAI_API_KEY="your_together_ai_api_key_here"
+# OPENAI_API_BASE="https://api.together.xyz/v1"
+# OPENAI_MODEL_NAME="deepseek-ai/DeepSeek-V3"
 ```
 
 ## Usage
