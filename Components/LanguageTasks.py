@@ -12,20 +12,16 @@ if not API_KEY:
 API_BASE = os.getenv("OPENAI_API_BASE", "https://api.openai.com/v1")
 MODEL_NAME = os.getenv("OPENAI_MODEL_NAME", "gpt-4o-2024-05-13")
 
-openai.api_key = API_KEY
-openai.api_base = API_BASE
+client = openai.OpenAI(
+    api_key=API_KEY,
+    base_url=API_BASE
+)
 
-# Function to extract start and end times
 def extract_times(json_string):
     try:
-        # Parse the JSON string
         data = json.loads(json_string)
-
-        # Extract start and end times as floats
         start_time = float(data[0]["start"])
         end_time = float(data[0]["end"])
-
-        # Convert to integers
         start_time_int = int(start_time)
         end_time_int = int(end_time)
         return start_time_int, end_time_int
@@ -34,7 +30,7 @@ def extract_times(json_string):
         return 0, 0
 
 system = """
-Baised on the Transcription user provides with start and end, Highilight the main parts in less then 1 min which can be directly converted into a short. highlight it such that its intresting and also keep the time staps for the clip to start and end. only select a continues Part of the video
+Baised on the Transcription user provides with start and end, Highilight the main parts in less then 1 min which can be directly converted into a short. highlight it such that its intresting and also keep the time staps for the clip to start and end. onlygit clone https://github.com/username/repo-name.git .   select a continues Part of the video
 
 Follow this Format and return in valid json 
 [{
@@ -56,7 +52,7 @@ Any Example
 def GetHighlight(Transcription):
     print("Getting Highlight from Transcription ")
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model=MODEL_NAME,
             temperature=0.7,
             messages=[
@@ -64,7 +60,6 @@ def GetHighlight(Transcription):
                 {"role": "user", "content": Transcription + system},
             ],
         )
-
         json_string = response.choices[0].message.content
         json_string = json_string.replace("json", "")
         json_string = json_string.replace("```", "")
