@@ -1,16 +1,11 @@
 import os
-from dotenv import load_dotenv
-
 from Components.YoutubeDownloader import download_youtube_video
 from Components.Edit import extractAudio, crop_video
 from Components.Transcription import transcribeAudio
 from Components.LanguageTasks import GetHighlight
 from Components.FaceCrop import crop_to_vertical, combine_videos
 
-load_dotenv()
-
 video_source = input("Enter 'Y' for YouTube URL or 'L' for Local file: ").lower()
-
 video_path_to_process = None
 
 if video_source == 'y':
