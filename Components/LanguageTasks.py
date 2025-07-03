@@ -29,8 +29,10 @@ def extract_times(json_string):
         print(f"Error in extract_times: {e}")
         return 0, 0
 
+
 system = """
-Baised on the Transcription user provides with start and end, Highilight the main parts in less then 1 min which can be directly converted into a short. highlight it such that its intresting and also keep the time staps for the clip to start and end. onlygit clone https://github.com/username/repo-name.git .   select a continues Part of the video
+
+Baised on the Transcription user provides with start and end, Highilight the main parts in less then 1 min which can be directly converted into a short. highlight it such that its intresting and also keep the time staps for the clip to start and end. only select a continues Part of the video
 
 Follow this Format and return in valid json 
 [{
@@ -41,6 +43,7 @@ end: "End Time for the highlighted clip"
 it should be one continues clip as it will then be cut from the video and uploaded as a tiktok video. so only have one start, end and content
 
 Dont say anything else, just return Proper Json. no explanation etc
+
 
 IF YOU DONT HAVE ONE start AND end WHICH IS FOR THE LENGTH OF THE ENTIRE HIGHLIGHT, THEN 10 KITTENS WILL DIE, I WILL DO JSON['start'] AND IF IT DOESNT WORK THEN...
 """
